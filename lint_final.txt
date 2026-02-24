@@ -1,0 +1,47 @@
+
+> voltmart-react@0.0.0 lint
+> eslint .
+
+
+/Users/cyril/Desktop/vv/src/pages/CheckoutSuccess.jsx
+  8:10  error  'searchParams' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/cyril/Desktop/vv/src/pages/Home.jsx
+  81:9  error  'nextSlide' is assigned a value but never used. Allowed unused vars must match /^[A-Z_]/u  no-unused-vars
+
+/Users/cyril/Desktop/vv/src/pages/Products.jsx
+   1:31  error    'useMemo' is defined but never used. Allowed unused vars must match /^[A-Z_]/u                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              no-unused-vars
+  72:7   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  70 |     const urlCategory = searchParams.get('category');
+  71 |     if (urlCategory && !filters.categories.includes(urlCategory)) {
+> 72 |       setFilters(prev => ({ ...prev, categories: [urlCategory] }));
+     |       ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  73 |       setCurrentPage(1);
+  74 |     }
+  75 |   }, [searchParams]);  react-hooks/set-state-in-effect
+  75:6   warning  React Hook useEffect has a missing dependency: 'filters.categories'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       react-hooks/exhaustive-deps
+  79:5   error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+  77 |   // Fetch products from API whenever filters/page/search change
+  78 |   useEffect(() => {
+> 79 |     setLoading(true);
+     |     ^^^^^^^^^^ Avoid calling setState() directly within an effect
+  80 |
+  81 |     const params = { page: currentPage, page_size: PER_PAGE };
+  82 |                                                                             react-hooks/set-state-in-effect
+
+✖ 6 problems (5 errors, 1 warning)
+
